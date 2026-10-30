@@ -467,7 +467,7 @@ body { overflow-x: clip; }
 
 /* 3Sixty logo (white) */
 .brand { display: inline-flex; align-items: center; }
-.logo { display: block; height: 58px; width: auto; }
-.logo-sm { height: 44px; }
+.logo { display: block; height: 84px; width: auto; }
+.logo-sm { height: 60px; }
 footer { align-items: center; }
-@media (max-width: 760px) { .logo { height: 44px; } .logo-sm { height: 38px; } footer { align-items: flex-start; gap: 10px; } }
+@media (max-width: 760px) { .logo { height: 60px; } .logo-sm { height: 50px; } footer { align-items: flex-start; gap: 10px; } }
