@@ -17,11 +17,11 @@ These photos show decorated pumpkins. The entry IDs are internal only (filenames
 
 ## Voting
 
-The ballot appears below the gallery. Voting buttons open the same Microsoft Form in a new tab. Microsoft Forms collects the votes; this repository doesn’t store responses.
+The ballot section below the gallery has an "Open the ballot" button that opens the Microsoft Form in a new tab. The form isn't embedded, because Microsoft Forms often won't load inside another page (especially when responses are limited to your organization). Microsoft Forms collects the votes; this repository doesn’t store responses.
 
 Keep ballot choices in Microsoft Forms aligned with the entry names shown on the page. Adding a gallery entry doesn’t create a Forms answer option. Manage response limits, dates, and notifications in Forms.
 
-To change ballots, update `VOTING_FORM_URL` in `script.js`, the voting links, and the iframe URL in `index.html`. Keep `embed=true` on the iframe.
+To change ballots, update `VOTING_FORM_URL` in `script.js` and the ballot link in `index.html`.
 
 ## Design
 

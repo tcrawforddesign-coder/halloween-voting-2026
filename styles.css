@@ -443,3 +443,24 @@ body { overflow-x: clip; }
   }
   @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
 }
+
+/* Ballot card: opens Microsoft Forms in a new tab (Forms often refuses to load inside other pages) */
+.vote-section { align-items: center; }
+.ballot-card {
+  position: relative; text-align: center; padding: 56px 32px 40px; margin-top: 40px;
+}
+.ballot-card::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(160deg, #2e1f47, #1d1429 70%);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 30px 60px -20px rgb(0 0 0 / .6);
+}
+.ballot-card > :not(.ghost) { position: relative; z-index: 2; }
+.ballot-card .ghost { z-index: 0; top: -64px; right: 48px; }
+.ballot-title { font-family: var(--heading); font-size: clamp(26px, 2.6vw, 34px); color: var(--pumpkin); margin: 0 0 24px; line-height: 1.1; }
+.button-big { font-size: 19px; padding: 18px 40px; }
+.ballot-note { color: var(--muted); font-size: 14px; margin: 16px 0 0; }
+@media (max-width: 760px) {
+  .ballot-card { padding: 44px 20px 32px; }
+  .ballot-card .ghost { top: -50px; right: 24px; }
+}
