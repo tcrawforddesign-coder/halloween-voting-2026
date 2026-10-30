@@ -98,7 +98,7 @@ nav { display: flex; align-items: center; gap: 8px; }
   gap: 48px; align-items: center;
 }
 .hero h1 { font-size: clamp(44px, 5vw, 74px); font-weight: 750; letter-spacing: -.035em; }
-.intro { font-size: 18px; color: var(--muted); max-width: 40ch; margin: 24px 0 32px; }
+.intro { font-size: 18px; color: var(--muted); max-width: 40ch; margin: 22px 0 24px; }
 
 /* Gallery */
 .gallery-section { max-width: 1280px; margin: 0 auto; padding: 48px 40px 96px; }
@@ -487,4 +487,23 @@ footer { align-items: center; }
 @media (max-width: 760px) {
   .ballot-card { padding: 8px 8px 14px; margin-top: 56px; }
   .ballot-frame { height: 1200px; }
+}
+
+/* Prize amounts in the hero */
+.prizes { margin: 0 0 28px; max-width: 30rem; }
+.prizes-title { font-family: var(--font); font-size: 15px; font-weight: 650; letter-spacing: .02em; color: var(--ink); margin: 0 0 10px; text-shadow: none; }
+.prize-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.prize-list li {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 10px 16px; border-radius: 12px;
+  background: rgb(39 28 56 / .7); border: 1px solid var(--line);
+}
+.prize-name { font-size: 15px; font-weight: 550; }
+.prize-amts { display: flex; gap: 16px; flex: none; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+.prize-amts b { color: var(--pumpkin); font-size: 19px; font-weight: 750; margin-right: 2px; }
+@media (max-width: 760px) {
+  .prize-list li { padding: 9px 12px; gap: 10px; }
+  .prize-name { font-size: 14px; }
+  .prize-amts { gap: 10px; }
+  .prize-amts b { font-size: 17px; }
 }

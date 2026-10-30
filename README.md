@@ -13,8 +13,8 @@ The published site lives on the `gh-pages` branch. Keep all asset paths relative
 | C03 | The Mandalorian | 3Sixty Costume Contest | `assets/submissions/costume-c03.jpg` |
 | C04 | Cardinals player | 3Sixty Costume Contest | `assets/submissions/costume-c04.jpg` |
 | P01 | Hooded pumpkin | 3Sixty Pumpkin Contest | `assets/submissions/pumpkin-p01.jpg` |
-| K01 | Striped cat pumpkin | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k01.jpeg` |
-| K02 | Pumpkin with a veil | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k02.jpeg` |
+| K01 | Cheshire Cat | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k01.jpeg` |
+| K02 | Corpse Bride | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k02.jpeg` |
 | K03 | Pumpkin with seed teeth | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k03.jpg` |
 
 Costume photos are resized and stripped of camera metadata before they are added. The entry IDs are internal only (filenames and `data-entry-id`); the page shows each entry by name. The public gallery and asset filenames contain no participant names.
