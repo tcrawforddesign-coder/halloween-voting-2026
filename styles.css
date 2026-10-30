@@ -100,38 +100,6 @@ nav { display: flex; align-items: center; gap: 8px; }
 .hero h1 { font-size: clamp(44px, 5vw, 74px); font-weight: 750; letter-spacing: -.035em; }
 .intro { font-size: 18px; color: var(--muted); max-width: 40ch; margin: 24px 0 32px; }
 
-/* The fan of real entry photos: the page's one orchestrated moment. */
-.hero-fan { position: relative; aspect-ratio: 1.15; isolation: isolate; }
-.hero-fan::before {
-  content: ""; position: absolute; inset: 8% 6% 0; z-index: -1;
-  background: radial-gradient(closest-side, rgb(242 139 61 / .22), transparent 75%);
-  filter: blur(10px);
-}
-.fan {
-  position: absolute; left: 50%; bottom: 4%;
-  width: 40%; height: auto; aspect-ratio: 3 / 4; object-fit: cover;
-  border-radius: var(--radius);
-  border: 1px solid rgb(242 237 228 / .14);
-  box-shadow: 0 24px 50px -12px rgb(4 5 9 / .7);
-  transform-origin: 50% 110%;
-  transform: translateX(calc(-50% + var(--x))) rotate(var(--r));
-}
-.fan-1 { --x: -46%; --r: -15deg; }
-.fan-2 { --x: -16%; --r: -5deg; }
-.fan-3 { --x: 16%; --r: 5deg; }
-.fan-4 { --x: 46%; --r: 15deg; }
-
-@media (prefers-reduced-motion: no-preference) {
-  .fan { animation: fan-in .9s var(--ease) both; }
-  .fan-1 { animation-delay: .05s; }
-  .fan-2 { animation-delay: .12s; }
-  .fan-3 { animation-delay: .19s; }
-  .fan-4 { animation-delay: .26s; }
-  @keyframes fan-in {
-    from { opacity: 0; transform: translateX(-50%) translateY(24px) rotate(0deg); }
-  }
-}
-
 /* Gallery */
 .gallery-section { max-width: 1280px; margin: 0 auto; padding: 48px 40px 96px; }
 .gallery-section h2, .vote-head h2 { font-size: clamp(34px, 3.6vw, 48px); }
@@ -236,8 +204,7 @@ body.modal-open { overflow: hidden; }
   .hero { grid-template-columns: 1fr; padding: 28px 20px 40px; gap: 28px; }
   .hero h1 { font-size: clamp(40px, 11vw, 56px); }
   .intro { font-size: 17px; margin: 16px 0 24px; }
-  .hero-fan { aspect-ratio: 1.75; max-width: 460px; width: 100%; margin: 0 auto; }
-  .fan { width: 36%; }
+  .hero-art { max-width: 340px; width: 100%; margin: 0 auto; }
   .gallery-section { padding: 32px 20px 64px; }
   .filters { flex-wrap: nowrap; overflow-x: auto; margin: -8px -20px 20px; padding: 8px 20px; scrollbar-width: none; }
   .filters::-webkit-scrollbar { display: none; }
@@ -360,7 +327,6 @@ body { overflow-x: clip; }
 }
 
 /* Taped-up polaroids */
-.fan { border: 8px solid var(--paper); border-bottom-width: 22px; border-radius: 4px; }
 .image-button {
   position: relative; overflow: visible; background: var(--paper);
   padding: 10px 10px 12px; border-radius: 4px;
@@ -425,7 +391,7 @@ body { overflow-x: clip; }
 }
 
 @media (max-width: 760px) {
-  .moon { width: 130px; right: 8%; top: auto; bottom: 150px; }
+  .moon { width: 130px; right: 6%; top: auto; bottom: 190px; }
   .web { width: 150px; top: -20px; }
   .hero h1 { font-size: clamp(44px, 12.5vw, 64px); }
   .gallery-grid { gap: 36px 16px; }
@@ -433,4 +399,47 @@ body { overflow-x: clip; }
   .image-button::before { width: 56px; height: 18px; top: -8px; }
   .ghost { width: 56px; top: -48px; right: 20px; }
   .embedded-form { margin-top: 36px; }
+}
+
+/* Hero scene: flickering jack-o'-lantern and a peeking ghost */
+.hero-art { position: relative; }
+.scene { display: block; width: 100%; height: auto; overflow: visible; cursor: pointer; }
+.jack { transform-box: fill-box; transform-origin: 50% 100%; }
+.face { stroke: #6b2a08; stroke-width: 4; stroke-linejoin: round; paint-order: stroke; filter: drop-shadow(0 0 6px rgb(255 200 90 / .85)); }
+.ghost-body { fill: #f2ede4; }
+.ghost-float { filter: drop-shadow(0 0 18px rgb(230 220 255 / .5)); }
+.ghost-eyes ellipse, .ghost-mouth { fill: #140e1f; }
+.ghost-eyes { transform-box: fill-box; transform-origin: center; }
+.scene:hover .face, .scene.boo .face { filter: drop-shadow(0 0 10px rgb(255 220 120 / 1)) drop-shadow(0 0 22px rgb(255 150 50 / .8)); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .jack { animation: hop 6s cubic-bezier(.3, 0, .3, 1) 1.5s infinite; }
+  .scene.boo .jack { animation: boo-hop .7s cubic-bezier(.3, 0, .3, 1); }
+  .face, .spill { animation: flicker 2.8s steps(1, end) infinite; }
+  .ghost-float { animation: haunt 7s ease-in-out infinite; }
+  .ghost-eyes { animation: blink 4.5s infinite; }
+  @keyframes flicker {
+    0%, 100% { opacity: 1; } 7% { opacity: .78; } 10% { opacity: 1; } 31% { opacity: .9; }
+    34% { opacity: .7; } 37% { opacity: 1; } 62% { opacity: .86; } 66% { opacity: 1; } 88% { opacity: .8; } 91% { opacity: 1; }
+  }
+  @keyframes hop {
+    0%, 82%, 100% { transform: none; }
+    85% { transform: scale(1.06, .9); }
+    90% { transform: translateY(-30px) scale(.96, 1.05) rotate(-3deg); }
+    95% { transform: scale(1.05, .92); }
+    98% { transform: translateY(-6px); }
+  }
+  @keyframes boo-hop {
+    0%, 100% { transform: none; }
+    20% { transform: scale(1.08, .88); }
+    50% { transform: translateY(-46px) scale(.95, 1.07) rotate(4deg); }
+    80% { transform: scale(1.06, .92); }
+  }
+  @keyframes haunt {
+    0%, 100% { transform: translate(0, 0) rotate(-4deg); }
+    30% { transform: translate(-26px, -22px) rotate(3deg); }
+    55% { transform: translate(14px, -40px) rotate(-2deg); }
+    80% { transform: translate(22px, -8px) rotate(5deg); }
+  }
+  @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
 }

@@ -37,11 +37,42 @@
     <p class="intro">Browse the costume and pumpkin entries, pick your favorites, then cast your votes below.</p>
     <a class="button" href="#gallery">View the entries</a>
   </div>
-  <div class="hero-fan" aria-hidden="true">
-    <img class="fan fan-1" src="assets/submissions/pumpkin-k03.jpg" alt="" width="1509" height="2048" decoding="async">
-    <img class="fan fan-2" src="assets/submissions/pumpkin-p01.jpg" alt="" width="1462" height="2047" decoding="async">
-    <img class="fan fan-3" src="assets/submissions/pumpkin-k01.jpeg" alt="" width="765" height="1028" decoding="async">
-    <img class="fan fan-4" src="assets/submissions/pumpkin-k02.jpeg" alt="" width="771" height="1020" fetchpriority="high" decoding="async">
+  <div class="hero-art" aria-hidden="true">
+    <svg class="scene" viewBox="0 0 500 460">
+      <defs>
+        <radialGradient id="candle" cx="50%" cy="40%" r="65%">
+          <stop offset="0" stop-color="#fff3b0"/><stop offset=".55" stop-color="#ffc24a"/><stop offset="1" stop-color="#ff7a1a"/>
+        </radialGradient>
+        <radialGradient id="spill" cx="50%" cy="50%" r="50%">
+          <stop offset="0" stop-color="#ffb347" stop-opacity=".55"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <g class="ghost-float">
+        <g transform="translate(78 92) scale(1.25)">
+          <path class="ghost-body" d="M8 52C8 22 26 4 40 4s32 18 32 48v44l-9-9-8 9-8-9-7 9-7-9-8 9-8-9-9 9z"/>
+          <g class="ghost-eyes"><ellipse cx="30" cy="40" rx="5" ry="7"/><ellipse cx="50" cy="40" rx="5" ry="7"/></g>
+          <ellipse class="ghost-mouth" cx="40" cy="60" rx="6" ry="8"/>
+        </g>
+      </g>
+      <ellipse class="spill" cx="250" cy="330" rx="230" ry="150" fill="url(#spill)"/>
+      <ellipse cx="250" cy="432" rx="150" ry="16" fill="#07050c" opacity=".55"/>
+      <g class="jack">
+        <path d="M250 200c-2-22 6-42 22-54" stroke="#4e6b2e" stroke-width="18" stroke-linecap="round" fill="none"/>
+        <path d="M268 160c22-10 40 4 34 20-5 12-22 10-22 0" stroke="#6f8f45" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <ellipse cx="168" cy="318" rx="92" ry="112" fill="#b9471a"/>
+        <ellipse cx="332" cy="318" rx="92" ry="112" fill="#b9471a"/>
+        <ellipse cx="208" cy="318" rx="92" ry="116" fill="#d9611f"/>
+        <ellipse cx="292" cy="318" rx="92" ry="116" fill="#d9611f"/>
+        <ellipse cx="250" cy="318" rx="72" ry="118" fill="#f0812f"/>
+        <ellipse cx="226" cy="246" rx="20" ry="40" fill="#ffc48a" opacity=".22" transform="rotate(-18 226 246)"/>
+        <g class="face" fill="url(#candle)">
+          <path d="M170 280l50-14-18 42z"/>
+          <path d="M330 280l-50-14 18 42z"/>
+          <path d="M240 318h20l-10 18z"/>
+          <path d="M156 346l26 8 9-13 18 16 19-11 18 17 18-17 19 11 18-16 9 13 26-8c-14 46-50 72-94 72s-80-26-94-72z"/>
+        </g>
+      </g>
+    </svg>
   </div>
 </section>
 

@@ -75,3 +75,14 @@ dialog.addEventListener('close', () => {
   // Return focus to the entry that is now showing, so keyboard users land where they left off.
   (current || lastTrigger)?.focus();
 });
+
+// Click the jack-o'-lantern for a hop
+const scene = document.querySelector('.scene');
+scene?.addEventListener('click', () => {
+  scene.classList.remove('boo');
+  void scene.getBoundingClientRect();
+  scene.classList.add('boo');
+});
+scene?.addEventListener('animationend', event => {
+  if (event.animationName === 'boo-hop') scene.classList.remove('boo');
+});
