@@ -8,8 +8,8 @@
 <title>3Sixty Halloween Contest 2026</title>
 <link rel="preload" href="assets/fonts/creepster.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="styles.css?v=20261030b">
-<script src="script.js?v=20261030b" defer></script>
+<link rel="stylesheet" href="styles.css?v=20261030d">
+<script src="script.js?v=20261030d" defer></script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
@@ -17,7 +17,7 @@
 </svg>
 <a class="skip-link" href="#gallery">Skip to the entries</a>
 <header class="site-header">
-  <a class="brand" href="#top" aria-label="3Sixty Halloween Contest 2026 home">3Sixty Integrated</a>
+  <a class="brand" href="#top"><img class="logo" src="assets/brand/3sixty-logo-white.png" alt="3Sixty Integrated" width="435" height="160"></a>
   <nav aria-label="Main navigation">
     <a class="nav-link" href="#gallery">Entries</a>
     <a class="nav-vote" href="#vote">Cast your vote</a>
@@ -81,12 +81,56 @@
   <h2 id="gallery-title">Contest entries</h2>
   <p class="section-lede">Select a photo to see it larger.</p>
   <div class="filters" role="group" aria-label="Filter entries by contest">
-    <button class="filter active" data-filter="all" aria-pressed="true">All entries <span class="count">4</span></button>
-    <button class="filter" data-filter="costumes" aria-pressed="false">3Sixty Costume Contest <span class="count">0</span></button>
+    <button class="filter active" data-filter="all" aria-pressed="true">All entries <span class="count">8</span></button>
+    <button class="filter" data-filter="costumes" aria-pressed="false">3Sixty Costume Contest <span class="count">4</span></button>
     <button class="filter" data-filter="pumpkins" aria-pressed="false">3Sixty Pumpkin Contest <span class="count">1</span></button>
     <button class="filter" data-filter="kids-pumpkins" aria-pressed="false">Kids’ Pumpkin Contest <span class="count">3</span></button>
   </div>
   <div class="gallery-grid">
+<article class="card" data-category="costumes" data-entry-id="C01">
+  <button class="image-button" data-title="Dorothy" data-image="assets/submissions/costume-c01.jpg" data-description="Blue gingham dress, white apron, and ruby slippers." aria-label="Enlarge Dorothy">
+    <img src="assets/submissions/costume-c01.jpg" alt="Person in a blue gingham Dorothy dress with a white apron, red bow, and sparkly red shoes, holding out the skirt." width="1500" height="2000" loading="lazy" decoding="async">
+  </button>
+  <div class="card-body">
+    <div>
+      <h3>Dorothy</h3>
+      <p class="card-meta">3Sixty Costume Contest</p>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="costumes" data-entry-id="C02">
+  <button class="image-button" data-title="Medieval knight" data-image="assets/submissions/costume-c02.jpg" data-description="Steel helm, chain mail, and a red-cross tabard." aria-label="Enlarge Medieval knight">
+    <img src="assets/submissions/costume-c02.jpg" alt="Person dressed as a medieval knight in a steel helmet, chain mail, shoulder armor, and a white tabard with a red cross." width="1500" height="2000" loading="lazy" decoding="async">
+  </button>
+  <div class="card-body">
+    <div>
+      <h3>Medieval knight</h3>
+      <p class="card-meta">3Sixty Costume Contest</p>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="costumes" data-entry-id="C03">
+  <button class="image-button" data-title="The Mandalorian" data-image="assets/submissions/costume-c03.jpg" data-description="Silver helmet and armored bounty-hunter suit." aria-label="Enlarge The Mandalorian">
+    <img src="assets/submissions/costume-c03.jpg" alt="Person in a Mandalorian costume with a silver helmet and a printed armor suit, hands on hips." width="1500" height="2000" loading="lazy" decoding="async">
+  </button>
+  <div class="card-body">
+    <div>
+      <h3>The Mandalorian</h3>
+      <p class="card-meta">3Sixty Costume Contest</p>
+    </div>
+  </div>
+</article>
+<article class="card" data-category="costumes" data-entry-id="C04">
+  <button class="image-button" data-title="Cardinals player" data-image="assets/submissions/costume-c04.jpg" data-description="Cardinals jersey number 5, cap, and eye black." aria-label="Enlarge Cardinals player">
+    <img src="assets/submissions/costume-c04.jpg" alt="Person dressed as a St. Louis Cardinals baseball player in a number 5 jersey, red cap, and eye black, flexing." width="1500" height="2000" loading="lazy" decoding="async">
+  </button>
+  <div class="card-body">
+    <div>
+      <h3>Cardinals player</h3>
+      <p class="card-meta">3Sixty Costume Contest</p>
+    </div>
+  </div>
+</article>
 <article class="card" data-category="pumpkins" data-entry-id="P01">
   <button class="image-button" data-title="Hooded pumpkin" data-image="assets/submissions/pumpkin-p01.jpg" data-description="Illuminated carved pumpkin with a fabric hood." aria-label="Enlarge Hooded pumpkin">
     <img src="assets/submissions/pumpkin-p01.jpg" alt="Illuminated pumpkin with carved eyes and a wavy mouth beneath a fabric hood." width="1462" height="2047" loading="lazy" decoding="async">
@@ -133,7 +177,7 @@
 </article>
   </div>
   <p id="empty-state" class="empty-state" hidden>No costume entries yet. Costume photos will appear here once they’re submitted.</p>
-  <p class="results sr-only" aria-live="polite">Showing 4 entries</p>
+  <p class="results sr-only" aria-live="polite">Showing 8 entries</p>
 </section>
 
 <section id="vote" class="vote-section" aria-labelledby="vote-title">
@@ -149,7 +193,7 @@
   </div>
 </section>
 </main>
-<footer><span class="brand">3Sixty Integrated</span><span>Happy Halloween from all of us</span></footer>
+<footer><img class="logo logo-sm" src="assets/brand/3sixty-logo-white.png" alt="3Sixty Integrated" width="435" height="160" loading="lazy"><span>Happy Halloween from all of us</span></footer>
 <dialog id="entry-dialog" aria-labelledby="dialog-title">
   <button class="close-dialog" aria-label="Close entry">×</button>
   <img id="dialog-image" alt="">
