@@ -3,102 +3,123 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#17191b">
+<meta name="theme-color" content="#121318">
 <meta name="description" content="View submissions for the 3Sixty Halloween Contest 2026 and cast your votes in the company costume and pumpkin contests.">
 <title>3Sixty Halloween Contest 2026</title>
+<link rel="preload" href="assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
 <script src="script.js" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#gallery">Skip to the entries</a>
 <header class="site-header">
-  <a class="brand" href="#" aria-label="3Sixty Halloween Contest 2026 home">3SIXTY INTEGRATED</a>
+  <a class="brand" href="#top" aria-label="3Sixty Halloween Contest 2026 home">3Sixty Integrated</a>
   <nav aria-label="Main navigation">
-    <a href="#gallery">Contest entries</a>
-    <a class="nav-vote vote-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=2zH5WK9dC0Wxyvkqk8LWfrDFBeKJoU9MvE1GYf_4z_1UQjE5T1pITExOMDNBSzdFTDFJMDJDVE0wSi4u" target="_blank" rel="noopener noreferrer">Cast your vote <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+    <a class="nav-link" href="#gallery">Entries</a>
+    <a class="nav-vote" href="#vote">Cast your vote</a>
   </nav>
 </header>
-<main>
+<main id="top">
 <section class="hero" aria-labelledby="hero-title">
   <div class="hero-copy">
     <h1 id="hero-title">3Sixty Halloween Contest 2026</h1>
-    <p class="intro">Browse the entries in the 3Sixty Costume Contest, 3Sixty Pumpkin Contest, and Kids’ Pumpkin Contest, then cast your votes below.</p>
-    <a class="button" href="#gallery">View the entries <span aria-hidden="true">↓</span></a>
+    <p class="intro">Browse the costume and pumpkin entries, note the entry numbers you like, then cast your votes below.</p>
+    <a class="button" href="#gallery">View the entries</a>
   </div>
-  <div class="hero-art" aria-hidden="true">
-    <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-    <span class="star star-one">✧</span><span class="star star-two">✦</span><span class="star star-three">+</span>
-    <img src="assets/pumpkin.svg" alt="">
+  <div class="hero-fan" aria-hidden="true">
+    <img class="fan fan-1" src="assets/submissions/pumpkin-k03.jpg" alt="" width="1509" height="2048" decoding="async">
+    <img class="fan fan-2" src="assets/submissions/pumpkin-p01.jpg" alt="" width="1462" height="2047" decoding="async">
+    <img class="fan fan-3" src="assets/submissions/pumpkin-k01.jpeg" alt="" width="765" height="1028" decoding="async">
+    <img class="fan fan-4" src="assets/submissions/pumpkin-k02.jpeg" alt="" width="771" height="1020" fetchpriority="high" decoding="async">
   </div>
 </section>
+
 <section id="gallery" class="gallery-section" aria-labelledby="gallery-title">
-  <div class="section-top">
-    <div><h2 id="gallery-title">Contest entries</h2><p>Select a photo to see it larger. Match its entry number to the ballot.</p></div>
-    <span class="entry-count">4 ENTRIES</span>
-  </div>
-  <div class="gallery-toolbar">
-    <div class="filters" role="group" aria-label="Filter submissions">
-      <button class="filter active" data-filter="all" aria-pressed="true">All entries <span>4</span></button>
-      <button class="filter" data-filter="costumes" aria-pressed="false">3Sixty Costume Contest <span>0</span></button>
-      <button class="filter" data-filter="pumpkins" aria-pressed="false">3Sixty Pumpkin Contest <span>1</span></button>
-      <button class="filter" data-filter="kids-pumpkins" aria-pressed="false">Kids’ Pumpkin Contest <span>3</span></button>
-    </div>
+  <h2 id="gallery-title">Contest entries</h2>
+  <p class="section-lede">Select a photo to see it larger. Each entry number matches an answer on the ballot.</p>
+  <div class="filters" role="group" aria-label="Filter entries by contest">
+    <button class="filter active" data-filter="all" aria-pressed="true">All entries <span class="count">4</span></button>
+    <button class="filter" data-filter="costumes" aria-pressed="false">3Sixty Costume Contest <span class="count">0</span></button>
+    <button class="filter" data-filter="pumpkins" aria-pressed="false">3Sixty Pumpkin Contest <span class="count">1</span></button>
+    <button class="filter" data-filter="kids-pumpkins" aria-pressed="false">Kids’ Pumpkin Contest <span class="count">3</span></button>
   </div>
   <div class="gallery-grid">
 <article class="card" data-category="pumpkins" data-entry-id="P01">
   <button class="image-button" data-title="P01 · Hooded pumpkin" data-image="assets/submissions/pumpkin-p01.jpg" data-description="Illuminated carved pumpkin with a fabric hood." aria-label="Enlarge P01, Hooded pumpkin">
-    <img src="assets/submissions/pumpkin-p01.jpg" alt="Illuminated pumpkin with carved eyes and a wavy mouth beneath a fabric hood." loading="lazy" decoding="async">
-    <span class="number">P01</span><span class="image-open" aria-hidden="true">↗</span>
+    <img src="assets/submissions/pumpkin-p01.jpg" alt="Illuminated pumpkin with carved eyes and a wavy mouth beneath a fabric hood." width="1462" height="2047" loading="lazy" decoding="async">
   </button>
-  <div class="card-meta"><span>3Sixty Pumpkin Contest</span></div>
-  <h3>Hooded pumpkin</h3>
-  <p>Illuminated carved pumpkin with a fabric hood.</p>
+  <div class="card-body">
+    <span class="number">P01</span>
+    <div>
+      <h3>Hooded pumpkin</h3>
+      <p class="card-meta">3Sixty Pumpkin Contest</p>
+    </div>
+  </div>
 </article>
 <article class="card" data-category="kids-pumpkins" data-entry-id="K01">
   <button class="image-button" data-title="K01 · Striped cat pumpkin" data-image="assets/submissions/pumpkin-k01.jpeg" data-description="Pink-and-purple striped cat pumpkin." aria-label="Enlarge K01, Striped cat pumpkin">
-    <img src="assets/submissions/pumpkin-k01.jpeg" alt="Pumpkin painted with pink and purple stripes, yellow eyes, and a cat’s grin." loading="lazy" decoding="async">
-    <span class="number">K01</span><span class="image-open" aria-hidden="true">↗</span>
+    <img src="assets/submissions/pumpkin-k01.jpeg" alt="Pumpkin painted with pink and purple stripes, yellow eyes, and a cat’s grin." width="765" height="1028" loading="lazy" decoding="async">
   </button>
-  <div class="card-meta"><span>Kids’ Pumpkin Contest</span></div>
-  <h3>Striped cat pumpkin</h3>
-  <p>Pink-and-purple striped cat pumpkin.</p>
+  <div class="card-body">
+    <span class="number">K01</span>
+    <div>
+      <h3>Striped cat pumpkin</h3>
+      <p class="card-meta">Kids’ Pumpkin Contest</p>
+    </div>
+  </div>
 </article>
 <article class="card" data-category="kids-pumpkins" data-entry-id="K02">
   <button class="image-button" data-title="K02 · Pumpkin with a veil" data-image="assets/submissions/pumpkin-k02.jpeg" data-description="Blue-haired pumpkin with a flower crown and veil." aria-label="Enlarge K02, Pumpkin with a veil">
-    <img src="assets/submissions/pumpkin-k02.jpeg" alt="Pumpkin with a painted face, long blue yarn hair, purple flowers, and a white veil." loading="lazy" decoding="async">
-    <span class="number">K02</span><span class="image-open" aria-hidden="true">↗</span>
+    <img src="assets/submissions/pumpkin-k02.jpeg" alt="Pumpkin with a painted face, long blue yarn hair, purple flowers, and a white veil." width="771" height="1020" loading="lazy" decoding="async">
   </button>
-  <div class="card-meta"><span>Kids’ Pumpkin Contest</span></div>
-  <h3>Pumpkin with a veil</h3>
-  <p>Blue-haired pumpkin with a flower crown and veil.</p>
+  <div class="card-body">
+    <span class="number">K02</span>
+    <div>
+      <h3>Pumpkin with a veil</h3>
+      <p class="card-meta">Kids’ Pumpkin Contest</p>
+    </div>
+  </div>
 </article>
 <article class="card" data-category="kids-pumpkins" data-entry-id="K03">
   <button class="image-button" data-title="K03 · Pumpkin with seed teeth" data-image="assets/submissions/pumpkin-k03.jpg" data-description="Carved pumpkin with pumpkin-seed teeth." aria-label="Enlarge K03, Pumpkin with seed teeth">
-    <img src="assets/submissions/pumpkin-k03.jpg" alt="Pumpkin with pointed carved eyes and a wide mouth filled with pumpkin seeds." loading="lazy" decoding="async">
-    <span class="number">K03</span><span class="image-open" aria-hidden="true">↗</span>
+    <img src="assets/submissions/pumpkin-k03.jpg" alt="Pumpkin with pointed carved eyes and a wide mouth filled with pumpkin seeds." width="1509" height="2048" loading="lazy" decoding="async">
   </button>
-  <div class="card-meta"><span>Kids’ Pumpkin Contest</span></div>
-  <h3>Pumpkin with seed teeth</h3>
-  <p>Carved pumpkin with pumpkin-seed teeth.</p>
+  <div class="card-body">
+    <span class="number">K03</span>
+    <div>
+      <h3>Pumpkin with seed teeth</h3>
+      <p class="card-meta">Kids’ Pumpkin Contest</p>
+    </div>
+  </div>
 </article>
   </div>
-  <p id="empty-state" class="empty-state" hidden>No costume entries yet.</p>
+  <p id="empty-state" class="empty-state" hidden>No costume entries yet. Costume photos will appear here once they’re submitted.</p>
   <p class="results sr-only" aria-live="polite">Showing 4 entries</p>
 </section>
-<section class="vote-section" aria-labelledby="vote-title">
-  <h2 id="vote-title">Cast your vote</h2>
-  <p>Submit your selections using the Microsoft Forms ballot below.</p>
-  <a class="button vote-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=2zH5WK9dC0Wxyvkqk8LWfrDFBeKJoU9MvE1GYf_4z_1UQjE5T1pITExOMDNBSzdFTDFJMDJDVE0wSi4u" target="_blank" rel="noopener noreferrer">Open the ballot <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+
+<section id="vote" class="vote-section" aria-labelledby="vote-title">
+  <div class="vote-head">
+    <h2 id="vote-title">Cast your vote</h2>
+    <p>Pick your favorites on the Microsoft Forms ballot using the entry numbers above.</p>
+  </div>
   <div class="embedded-form">
     <iframe src="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=2zH5WK9dC0Wxyvkqk8LWfrDFBeKJoU9MvE1GYf_4z_1UQjE5T1pITExOMDNBSzdFTDFJMDJDVE0wSi4u&amp;embed=true" title="3Sixty Halloween Contest 2026 voting ballot" loading="lazy" allowfullscreen></iframe>
   </div>
-  <small id="vote-note">If the ballot doesn’t load here, use the button to open it in a new tab.</small>
+  <p class="vote-note">Ballot not loading? <a class="vote-link" href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=2zH5WK9dC0Wxyvkqk8LWfrDFBeKJoU9MvE1GYf_4z_1UQjE5T1pITExOMDNBSzdFTDFJMDJDVE0wSi4u" target="_blank" rel="noopener noreferrer">Open it in a new tab<span class="sr-only"> (opens in a new tab)</span></a></p>
 </section>
 </main>
-<footer><a class="brand" href="#">3SIXTY INTEGRATED</a><span>3Sixty Halloween Contest 2026</span></footer>
+<footer><span class="brand">3Sixty Integrated</span><span>Halloween Contest 2026</span></footer>
 <dialog id="entry-dialog" aria-labelledby="dialog-title">
-  <button class="close-dialog" aria-label="Close submission">×</button>
+  <button class="close-dialog" aria-label="Close entry">×</button>
   <img id="dialog-image" alt="">
-  <div class="dialog-copy"><h2 id="dialog-title"></h2><p id="dialog-description"></p></div>
+  <div class="dialog-copy">
+    <h2 id="dialog-title"></h2>
+    <p id="dialog-description"></p>
+    <div class="dialog-nav">
+      <button class="dialog-step" data-step="-1">Previous</button>
+      <button class="dialog-step" data-step="1">Next</button>
+    </div>
+  </div>
 </dialog>
 </body>
 </html>

@@ -23,6 +23,10 @@ Keep ballot choices in Microsoft Forms aligned with the entry IDs above. Adding 
 
 To change ballots, update `VOTING_FORM_URL` in `script.js`, the voting links, and the iframe URL in `index.html`. Keep `embed=true` on the iframe.
 
+## Design
+
+One font, Bricolage Grotesque, is self-hosted in `assets/fonts` under the SIL Open Font License. The hero fans out the entry photos from `assets/submissions`; if entries change, update the four `fan` images in `index.html`. The fan-in animation is skipped for visitors who prefer reduced motion.
+
 ## Local preview
 
 Run `python3 -m http.server 8000` from the repository root, then open the local server in your browser.
