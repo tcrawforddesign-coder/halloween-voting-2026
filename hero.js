@@ -9,7 +9,7 @@
   const TAU = Math.PI * 2;
   const rand = (a, b) => a + Math.random() * (b - a);
 
-  let W = 0, H = 0, u = 1, mx = 0, my = 0, mr = 0, land, fog = [], clouds = [], visible = true;
+  let ground = 0, W = 0, H = 0, u = 1, mx = 0, my = 0, mr = 0, land, fog = [], clouds = [], visible = true;
   const ghosts = [
     { off: 0, sp: .042, y: -.35, h: 150, a: .95, tw: 1, ph: 0 },
     { off: .45, sp: .033, y: -.95, h: 100, a: .8, tw: 1.2, ph: 2.1 },
@@ -17,13 +17,16 @@
   ];
   const bats = Array.from({ length: 4 }, (_, i) => ({ off: i / 4, sp: rand(.03, .05), y: rand(.08, .45), amp: rand(.02, .05), s: rand(.6, 1.1), fl: rand(9, 14), ph: rand(0, TAU) }));
 
-  function softSprite(w, h, n, color, yMin, yMax) {
+  // Soft blobs kept inside the sprite (wrapped horizontally when tiling) so no blob is ever clipped into a hard edge
+  function softSprite(w, h, n, color, yMin, yMax, tile) {
     const cv = document.createElement('canvas'); cv.width = w; cv.height = h; const c = cv.getContext('2d');
     for (let i = 0; i < n; i++) {
-      const x = rand(0, w), y = rand(h * yMin, h * yMax), r = rand(h * .15, h * .42);
-      for (const ox of [-w, 0, w]) {
+      const r = rand(h * .12, h * .3);
+      const y = Math.min(h - r, Math.max(r, rand(h * yMin, h * yMax)));
+      const x = tile ? rand(0, w) : rand(r, w - r);
+      for (const ox of tile ? [-w, 0, w] : [0]) {
         const g = c.createRadialGradient(x + ox, y, 0, x + ox, y, r);
-        g.addColorStop(0, color); g.addColorStop(1, 'rgba(0,0,0,0)');
+        g.addColorStop(0, color); g.addColorStop(.6, color.replace(/[\d.]+\)$/, m => (parseFloat(m) * .45).toFixed(3) + ')')); g.addColorStop(1, 'rgba(0,0,0,0)');
         c.fillStyle = g; c.fillRect(x + ox - r, y - r, r * 2, r * 2);
       }
     }
@@ -47,11 +50,13 @@
     // the moon sits in the middle of the art column
     mx = ar.left - cr.left + ar.width / 2; my = ar.top - cr.top + ar.height * .42;
     mr = Math.min(ar.width, ar.height) * .34; u = mr / 175;
-    const ground = Math.min(H, ar.bottom - cr.top + 30 * u);
+    ground = Math.min(H, ar.bottom - cr.top + 30 * u);
     // hills and trees, drawn once
     land = document.createElement('canvas'); land.width = W * dpr; land.height = H * dpr;
     const c = land.getContext('2d'); c.scale(dpr, dpr);
-    c.fillStyle = '#1a1029';
+    const hill = c.createLinearGradient(0, ground - 80 * u, 0, H);
+    hill.addColorStop(0, '#1a1029'); hill.addColorStop(.5, '#160e24'); hill.addColorStop(1, 'rgba(20,14,31,0)');
+    c.fillStyle = hill;
     c.beginPath(); c.moveTo(0, ground - 30 * u);
     c.bezierCurveTo(W * .25, ground - 80 * u, W * .45, ground - 20 * u, W * .62, ground - 50 * u);
     c.bezierCurveTo(W * .8, ground - 80 * u, W * .92, ground - 30 * u, W, ground - 60 * u);
@@ -62,11 +67,13 @@
       const x = rand(left, W);
       tree(c, x, ground - rand(35, 60) * u, rand(40, 70) * u, -Math.PI / 2 + rand(-.2, .2), rand(2, 3.5) * u, 6);
     }
-    c.fillStyle = '#0d0815';
+    const fade = c.createLinearGradient(0, ground - 20 * u, 0, H);
+    fade.addColorStop(0, '#0d0815'); fade.addColorStop(.45, '#130d1e'); fade.addColorStop(1, 'rgba(20,14,31,0)');
+    c.fillStyle = fade;
     c.beginPath(); c.moveTo(0, ground + 10 * u); c.bezierCurveTo(W * .3, ground - 20 * u, W * .6, ground + 20 * u, W, ground - 10 * u); c.lineTo(W, H); c.lineTo(0, H); c.fill();
     tree(c, Math.min(W - 30 * u, mx + mr * 1.9), ground + 4 * u, 150 * u, -Math.PI / 2 - .2, 9 * u, 8);
-    fog = [softSprite(900, 260, 34, 'rgba(215,205,240,.13)', .25, .85), softSprite(900, 260, 30, 'rgba(215,205,240,.17)', .25, .85)];
-    clouds = [0, 1, 2, 3].map(i => ({ img: softSprite(520, 180, 14, i % 2 ? 'rgba(80,60,120,.38)' : 'rgba(120,100,160,.3)', .35, .7), x: rand(0, 1), dy: rand(-1.2, .4), sp: rand(.006, .014), s: rand(.7, 1.2) }));
+    fog = [softSprite(900, 260, 44, 'rgba(215,205,240,.13)', .3, .7, true), softSprite(900, 260, 40, 'rgba(215,205,240,.17)', .3, .7, true)];
+    clouds = [0, 1, 2, 3].map(i => ({ img: softSprite(520, 180, 16, i % 2 ? 'rgba(80,60,120,.38)' : 'rgba(120,100,160,.3)', .35, .65, false), x: rand(0, 1), dy: rand(-1.2, .4), sp: rand(.006, .014), s: rand(.7, 1.2) }));
     if (REDUCE) draw(6);
   }
 
@@ -152,8 +159,8 @@
       drawBat(W * (1.05 - p), H * b.y + Math.sin(t * 1.3 + b.ph) * H * b.amp, b.s * u * 1.6, t * b.fl + b.ph, Math.sin(t * 1.3 + b.ph) * .15);
     }
     ctx.drawImage(land, 0, 0, W, H);
-    fogBand(fog[0], H - 300 * u, 260 * u, t * .014, .95);
-    fogBand(fog[1], H - 220 * u, 280 * u, t * .03, 1);
+    fogBand(fog[0], ground - 170 * u, 260 * u, t * .014, .95);
+    fogBand(fog[1], ground - 100 * u, 280 * u, t * .03, 1);
   }
 
   const ro = new ResizeObserver(() => resize());

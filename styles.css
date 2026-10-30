@@ -552,3 +552,49 @@ footer { align-items: center; }
   .st-top { font-size: 34px; }
   .st-name, .st-2nd { font-size: 12px; text-align: center; }
 }
+
+/* ---------- Seamless edges ---------- */
+/* Hero scene fades out over a long run so it melts into the page */
+.hero-canvas {
+  height: calc(100% + 340px);
+  -webkit-mask-image: linear-gradient(transparent, #000 12%, #000 58%, transparent 100%);
+  mask-image: linear-gradient(transparent, #000 12%, #000 58%, transparent 100%);
+}
+@media (max-width: 760px) { .hero-canvas { height: calc(100% + 260px); } }
+/* Page background blends from the hero sky into the night with no visible step */
+body {
+  background:
+    radial-gradient(1200px 520px at 78% -80px, rgb(120 72 190 / .35), transparent 70%),
+    linear-gradient(180deg, #24163c 0, #1d1231 600px, #170f27 1100px, var(--night) 1700px);
+  background-color: var(--night);
+}
+/* Divider lines fade out at both ends instead of stopping hard */
+.vote-section, footer { border-top: 0; position: relative; }
+.vote-section::after, footer::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(185 160 230 / .28) 30%, rgb(185 160 230 / .28) 70%, transparent);
+}
+/* Spiderweb strands fade at the ends */
+.web {
+  -webkit-mask-image: radial-gradient(circle at 100% 0, #000 45%, transparent 98%);
+  mask-image: radial-gradient(circle at 100% 0, #000 45%, transparent 98%);
+}
+/* Voting date */
+.vote-date { display: flex; align-items: center; gap: 10px; margin: 18px 0 0; color: var(--ink); font-size: 16px; }
+.vote-date strong { color: var(--pumpkin-hi); font-weight: 700; }
+.vote-date-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pumpkin); box-shadow: 0 0 0 4px rgb(242 139 61 / .22); flex: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .vote-date-dot { animation: beacon 2s ease-in-out infinite; }
+  @keyframes beacon { 50% { box-shadow: 0 0 0 8px rgb(242 139 61 / 0); } }
+}
+.vote-head p strong { color: var(--pumpkin-hi); }
+.vote-head p { max-width: 46ch; }
+@media (max-width: 760px) { .vote-date { font-size: 15px; align-items: flex-start; } .vote-date-dot { margin-top: 6px; } }
+
+/* Tablet: stack the hero like on phones so the scene has room */
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: 1fr; padding: 32px 28px 40px; gap: 24px; min-height: 0; }
+  .hero-art { min-height: 0; aspect-ratio: 1 / .7; width: 100%; max-width: 640px; margin: 0 auto; }
+  .hero h1 { font-size: clamp(44px, 8vw, 72px); }
+}
+@media (max-width: 760px) { .hero-art { aspect-ratio: 1 / .85; } }
