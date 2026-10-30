@@ -29,7 +29,7 @@ To change ballots, update `VOTING_FORM_URL` in `script.js`, plus the iframe URL 
 
 ## Design
 
-Headings use Creepster and body text uses Bricolage Grotesque; both are self-hosted in `assets/fonts` under the SIL Open Font License. The moon, bats, fog, spiderweb and peeking ghost are drawn in `index.html` and `styles.css`. The hero is an animated SVG scene in `index.html`: a flickering jack-o'-lantern that hops (and hops on click) with a floating ghost. All animations are skipped for visitors who prefer reduced motion.
+Headings use Creepster and body text uses Bricolage Grotesque; both are self-hosted in `assets/fonts` under the SIL Open Font License. The moon, bats, fog, spiderweb and peeking ghost are drawn in `index.html` and `styles.css`. The hero is an animated canvas scene in `hero.js`: friendly ghosts with curling tails drift across the full moon, with clouds, bats, a treeline and rolling fog. All animations are skipped for visitors who prefer reduced motion.
 
 ## Local preview
 

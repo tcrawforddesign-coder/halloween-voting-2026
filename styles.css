@@ -507,3 +507,48 @@ footer { align-items: center; }
   .prize-amts { gap: 10px; }
   .prize-amts b { font-size: 17px; }
 }
+
+/* ---------- Ghosts-over-the-moon hero ---------- */
+.hero { min-height: 640px; }
+.hero-canvas {
+  position: absolute; z-index: -1; pointer-events: none;
+  top: -110px; height: calc(100% + 150px); left: 50%; width: 100vw; transform: translateX(-50%);
+  -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 80%, transparent); mask-image: linear-gradient(transparent, #000 14%, #000 80%, transparent);
+}
+.hero-art { align-self: stretch; min-height: 420px; }
+.hero-copy { position: relative; z-index: 1; }
+
+/* Prize stickers: short and loud */
+.prizes { margin: 0 0 30px; max-width: none; }
+.prizes-kicker {
+  font-family: var(--heading); color: var(--ink); font-size: 30px; line-height: 1; margin: 0 0 14px;
+  text-shadow: 0 0 18px rgb(170 120 255 / .55);
+}
+.stickers { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 14px; }
+.sticker {
+  position: relative; display: grid; justify-items: center; gap: 2px;
+  padding: 12px 18px 12px; border-radius: 16px; min-width: 128px;
+  color: var(--on-pumpkin); box-shadow: 0 10px 24px -8px rgb(0 0 0 / .6), inset 0 0 0 2px rgb(255 255 255 / .25);
+  transition: transform .3s var(--ease);
+}
+.sticker-costume { background: var(--pumpkin); transform: rotate(-4deg); }
+.sticker-pumpkin { background: #b98cff; transform: rotate(3deg) translateY(6px); }
+.sticker-kids { background: #9be15d; transform: rotate(-2deg) translateY(-2px); }
+.sticker:hover { transform: rotate(0) scale(1.06); }
+.st-name { font-weight: 700; font-size: 14px; letter-spacing: .01em; }
+.st-top { font-family: var(--heading); font-size: 44px; line-height: .95; }
+.st-2nd { font-size: 13px; font-weight: 600; opacity: .85; }
+@media (prefers-reduced-motion: no-preference) {
+  .sticker { animation: pop .6s var(--ease) both; }
+  .sticker-pumpkin { animation-delay: .12s; } .sticker-kids { animation-delay: .24s; }
+  @keyframes pop { from { opacity: 0; scale: .6; } }
+}
+@media (max-width: 760px) {
+  .hero { min-height: 0; }
+  .hero-art { min-height: 0; aspect-ratio: 1 / .85; width: 100%; }
+  .hero-canvas { top: -90px; height: calc(100% + 130px); }
+  .stickers { gap: 10px; }
+  .sticker { min-width: 0; flex: 1 1 0; padding: 10px 8px; }
+  .st-top { font-size: 34px; }
+  .st-name, .st-2nd { font-size: 12px; text-align: center; }
+}
