@@ -16,7 +16,9 @@ for (const filter of document.querySelectorAll('.filter')) {
     for (const card of cards) {
       card.hidden = filter.dataset.filter !== 'all' && card.dataset.category !== filter.dataset.filter;
     }
-    document.querySelector('.results').textContent = `Showing ${cards.filter(card => !card.hidden).length} entries`;
+    const visibleCount = cards.filter(card => !card.hidden).length;
+    document.querySelector('.results').textContent = `Showing ${visibleCount} ${visibleCount === 1 ? 'entry' : 'entries'}`;
+    document.querySelector('#empty-state').hidden = visibleCount !== 0;
   });
 }
 
@@ -28,7 +30,7 @@ for (const trigger of document.querySelectorAll('.image-button')) {
     document.querySelector('#dialog-title').textContent = trigger.dataset.title;
     document.querySelector('#dialog-description').textContent = trigger.dataset.description;
     const image = document.querySelector('#dialog-image');
-    image.src = `assets/${trigger.dataset.image}.svg`;
+    image.src = trigger.dataset.image;
     image.alt = trigger.querySelector('img').alt;
     dialog.showModal();
     document.body.classList.add('modal-open');

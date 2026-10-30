@@ -1,21 +1,28 @@
-# The Midnight Gallery — Halloween 2026
+# 3Sixty Halloween Contest 2026
 
-A mobile-friendly Halloween submission gallery made with plain HTML, CSS, and JavaScript. No dependencies or build step.
+Company contest gallery with a Microsoft Forms voting ballot. The site uses plain HTML, CSS, and JavaScript.
 
-## Run locally
+The published site lives on the `gh-pages` branch. Keep all asset paths relative so the gallery works under the repository’s GitHub Pages URL.
 
-From the repository root:
+## Current submissions
 
-```sh
-python3 -m http.server 8000 --bind 0.0.0.0
-```
+| Entry | Description | Contest | Image |
+| --- | --- | --- | --- |
+| P01 | Hooded pumpkin | 3Sixty Pumpkin Contest | `assets/submissions/pumpkin-p01.jpg` |
+| K01 | Striped cat pumpkin | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k01.jpeg` |
+| K02 | Pumpkin with a veil | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k02.jpeg` |
+| K03 | Pumpkin with seed teeth | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k03.jpg` |
 
-Open the site in your browser using your development environment's local server access. You can also open `index.html` directly.
+These photos show decorated pumpkins. Entry numbers identify the submissions; the public gallery and asset filenames contain no participant names. The 3Sixty Costume Contest has no entries yet.
 
-## Customize
+## Voting
 
-- The supplied Microsoft Forms voting form is embedded below the gallery. The two voting buttons open the same form in a new tab as a fallback. To change forms, update `VOTING_FORM_URL` in `script.js`, both voting links, and the iframe URL in `index.html`. Keep `embed=true` on the iframe URL.
-- Replace the original SVG placeholder illustrations in `assets/` with submission images. Keep relative image paths, update image descriptions, and edit the matching card details in `index.html`.
-- Categories, image enlargement dialogs, keyboard controls, and responsive layouts are included.
+The ballot appears below the gallery. Voting buttons open the same Microsoft Form in a new tab. Microsoft Forms collects the votes; this repository doesn’t store responses.
 
-Votes are submitted through the embedded Microsoft Form and stored by Microsoft Forms, not in the repository. Form access, sign-in requirements, and response limits are controlled in Microsoft Forms settings. If embedding is restricted by the form owner or a browser, visitors can use the new-tab voting button. A static site cannot securely store votes itself without an external service or backend.
+Keep ballot choices in Microsoft Forms aligned with the entry IDs above. Adding a gallery entry doesn’t create a Forms answer option. Manage response limits, dates, and notifications in Forms.
+
+To change ballots, update `VOTING_FORM_URL` in `script.js`, the voting links, and the iframe URL in `index.html`. Keep `embed=true` on the iframe.
+
+## Local preview
+
+Run `python3 -m http.server 8000` from the repository root, then open the local server in your browser.
