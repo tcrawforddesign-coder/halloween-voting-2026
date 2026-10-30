@@ -13,13 +13,13 @@ The published site lives on the `gh-pages` branch. Keep all asset paths relative
 | K02 | Pumpkin with a veil | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k02.jpeg` |
 | K03 | Pumpkin with seed teeth | Kids’ Pumpkin Contest | `assets/submissions/pumpkin-k03.jpg` |
 
-These photos show decorated pumpkins. Entry numbers identify the submissions; the public gallery and asset filenames contain no participant names. The 3Sixty Costume Contest has no entries yet.
+These photos show decorated pumpkins. The entry IDs are internal only (filenames and `data-entry-id`); the page shows each entry by name. The public gallery and asset filenames contain no participant names. The 3Sixty Costume Contest has no entries yet.
 
 ## Voting
 
 The ballot appears below the gallery. Voting buttons open the same Microsoft Form in a new tab. Microsoft Forms collects the votes; this repository doesn’t store responses.
 
-Keep ballot choices in Microsoft Forms aligned with the entry IDs above. Adding a gallery entry doesn’t create a Forms answer option. Manage response limits, dates, and notifications in Forms.
+Keep ballot choices in Microsoft Forms aligned with the entry names shown on the page. Adding a gallery entry doesn’t create a Forms answer option. Manage response limits, dates, and notifications in Forms.
 
 To change ballots, update `VOTING_FORM_URL` in `script.js`, the voting links, and the iframe URL in `index.html`. Keep `embed=true` on the iframe.
 

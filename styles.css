@@ -166,12 +166,8 @@ nav { display: flex; align-items: center; gap: 8px; }
 .image-button:hover img { transform: scale(1.04); }
 .image-button:focus-visible { outline-offset: 4px; border-radius: var(--radius); }
 
-.card-body { display: flex; align-items: flex-start; gap: 14px; margin-top: 16px; }
-.number {
-  flex: none; font-size: 26px; font-weight: 800; line-height: 1; letter-spacing: -.02em;
-  color: var(--pumpkin); font-variant-numeric: tabular-nums; padding-top: 1px;
-}
-.card h3 { font-size: 19px; font-weight: 650; letter-spacing: -.01em; line-height: 1.2; }
+.card-body { display: block; margin-top: 16px; }
+.card h3 { font-size: 20px; font-weight: 650; letter-spacing: -.01em; line-height: 1.2; }
 .card-meta { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
 
 .empty-state {
@@ -243,12 +239,11 @@ body.modal-open { overflow: hidden; }
   .hero-fan { aspect-ratio: 1.75; max-width: 460px; width: 100%; margin: 0 auto; }
   .fan { width: 36%; }
   .gallery-section { padding: 32px 20px 64px; }
-  .filters { flex-wrap: nowrap; overflow-x: auto; margin: 0 -20px 28px; padding: 2px 20px; scrollbar-width: none; }
+  .filters { flex-wrap: nowrap; overflow-x: auto; margin: -8px -20px 20px; padding: 8px 20px; scrollbar-width: none; }
   .filters::-webkit-scrollbar { display: none; }
   .filter { flex: none; }
   .gallery-grid { gap: 28px 14px; }
   .card-body { gap: 10px; margin-top: 12px; }
-  .number { font-size: 21px; }
   .card h3 { font-size: 16px; }
   .card-meta { font-size: 13px; }
   .vote-section { padding: 56px 20px 64px; }
@@ -299,7 +294,7 @@ body::before {
 
 h1, h2 { font-family: var(--heading); font-weight: 400; letter-spacing: .01em; line-height: 1; }
 .hero h1 {
-  font-size: clamp(50px, 6.2vw, 96px); font-weight: 400; letter-spacing: .015em;
+  font-size: clamp(50px, 6.2vw, 84px); font-weight: 400; letter-spacing: .015em;
   color: var(--pumpkin);
   text-shadow: 0 0 28px rgb(242 139 61 / .45), 0 4px 0 #5b2508;
 }
@@ -315,8 +310,7 @@ h1, h2 { font-family: var(--heading); font-weight: 400; letter-spacing: .01em; l
 .hero { position: relative; isolation: isolate; }
 .sky {
   position: absolute; top: -90px; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
-  z-index: -1; pointer-events: none; overflow: hidden;
-  -webkit-mask-image: linear-gradient(#000 75%, transparent); mask-image: linear-gradient(#000 75%, transparent);
+  z-index: -1; pointer-events: none; overflow-x: clip;
 }
 body { overflow-x: clip; }
 .site-header { position: relative; z-index: 2; }
@@ -336,12 +330,14 @@ body { overflow-x: clip; }
 .bat-2 { top: 24%; width: 40px; height: 16px; }
 .bat-3 { top: 6%; width: 30px; height: 12px; }
 .fog {
-  position: absolute; left: -10%; right: -10%; bottom: -30px; height: 170px;
+  position: absolute; left: 0; right: 0; bottom: -90px; height: 240px;
   background:
     radial-gradient(40% 60% at 20% 70%, rgb(210 195 235 / .16), transparent 70%),
     radial-gradient(35% 55% at 60% 80%, rgb(210 195 235 / .14), transparent 70%),
     radial-gradient(30% 50% at 90% 70%, rgb(210 195 235 / .12), transparent 70%);
   filter: blur(8px);
+  -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 35%, transparent 100%);
 }
 @media (prefers-reduced-motion: no-preference) {
   .bat-1 { animation: fly 13s linear 1.2s infinite; }
@@ -387,7 +383,7 @@ body { overflow-x: clip; }
 .card:nth-child(4n) .image-button { transform: rotate(2.2deg); }
 .card:nth-child(4n) .image-button::before { background: rgb(160 120 230 / .6); transform: translateX(-50%) rotate(-5deg); }
 .card .image-button:hover, .card .image-button:focus-visible {
-  transform: rotate(0) translateY(-6px);
+  z-index: 2; transform: rotate(0) translateY(-6px);
   box-shadow: 0 0 0 3px var(--pumpkin), 0 22px 50px -10px rgb(242 139 61 / .5);
 }
 .gallery-grid { gap: 48px 28px; padding-top: 10px; }
@@ -410,8 +406,11 @@ body { overflow-x: clip; }
 }
 
 /* A ghost peeking over the ballot */
-.vote-section {
-  background: radial-gradient(700px 360px at 70% 30%, rgb(120 72 190 / .18), transparent 70%);
+.vote-section { position: relative; }
+.vote-section::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 62% 45%, rgb(120 72 190 / .2), transparent 100%);
 }
 .embedded-form { position: relative; overflow: visible; background: none; border: 0; }
 .embedded-form iframe { position: relative; z-index: 1; border-radius: var(--radius); background: #fff; }
