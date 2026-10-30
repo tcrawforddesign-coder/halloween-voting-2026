@@ -291,11 +291,14 @@ body { overflow-x: clip; }
     radial-gradient(circle at 38% 34%, #fff8e2, #f2dca8 60%, #d8bb7e);
   box-shadow: 0 0 90px 24px rgb(255 222 150 / .22), 0 0 220px 60px rgb(160 110 230 / .18);
 }
-.bat { position: absolute; width: 58px; height: 24px; fill: #0a0710; left: 100%; }
-.bat use { transform-box: fill-box; transform-origin: center; }
+.bat { position: absolute; width: 70px; height: 35px; fill: #0a0710; left: 100%; overflow: visible;
+  filter: drop-shadow(0 0 4px rgb(190 160 255 / .35)); }
+.wing { transform-box: view-box; }
+.wing-l { transform-origin: 54px 28px; }
+.wing-r { transform-origin: 66px 28px; }
 .bat-1 { top: 10%; }
-.bat-2 { top: 24%; width: 40px; height: 16px; }
-.bat-3 { top: 6%; width: 30px; height: 12px; }
+.bat-2 { top: 24%; width: 48px; height: 24px; }
+.bat-3 { top: 6%; width: 36px; height: 18px; }
 .fog {
   position: absolute; left: 0; right: 0; bottom: -90px; height: 240px;
   background:
@@ -310,7 +313,8 @@ body { overflow-x: clip; }
   .bat-1 { animation: fly 13s linear 1.2s infinite; }
   .bat-2 { animation: fly 17s linear 4s infinite; }
   .bat-3 { animation: fly 21s linear 8s infinite; }
-  .bat use { animation: flap .18s ease-in-out infinite alternate; }
+  .wing-l { animation: flap-l .22s ease-in-out infinite alternate; }
+  .wing-r { animation: flap-r .22s ease-in-out infinite alternate; }
   .fog { animation: drift 18s ease-in-out infinite alternate; }
   @keyframes fly {
     0% { transform: translate(0, 0); }
@@ -319,7 +323,8 @@ body { overflow-x: clip; }
     75% { transform: translate(-105vw, 26px); }
     100% { transform: translate(-140vw, 0); }
   }
-  @keyframes flap { to { transform: scaleY(.35); } }
+  @keyframes flap-l { from { transform: rotate(-28deg); } to { transform: rotate(26deg); } }
+  @keyframes flap-r { from { transform: rotate(28deg); } to { transform: rotate(-26deg); } }
   @keyframes drift { to { transform: translateX(6%); } }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -401,23 +406,17 @@ body { overflow-x: clip; }
   .embedded-form { margin-top: 36px; }
 }
 
-/* Hero scene: flickering jack-o'-lantern and a peeking ghost */
+/* Hero scene: flickering jack-o'-lantern and a black cat */
 .hero-art { position: relative; }
 .scene { display: block; width: 100%; height: auto; overflow: visible; cursor: pointer; }
 .jack { transform-box: fill-box; transform-origin: 50% 100%; }
 .face { stroke: #6b2a08; stroke-width: 4; stroke-linejoin: round; paint-order: stroke; filter: drop-shadow(0 0 6px rgb(255 200 90 / .85)); }
-.ghost-body { fill: #f2ede4; }
-.ghost-float { filter: drop-shadow(0 0 18px rgb(230 220 255 / .5)); }
-.ghost-eyes ellipse, .ghost-mouth { fill: #140e1f; }
-.ghost-eyes { transform-box: fill-box; transform-origin: center; }
 .scene:hover .face, .scene.boo .face { filter: drop-shadow(0 0 10px rgb(255 220 120 / 1)) drop-shadow(0 0 22px rgb(255 150 50 / .8)); }
 
 @media (prefers-reduced-motion: no-preference) {
   .jack { animation: hop 6s cubic-bezier(.3, 0, .3, 1) 1.5s infinite; }
   .scene.boo .jack { animation: boo-hop .7s cubic-bezier(.3, 0, .3, 1); }
   .face, .spill { animation: flicker 2.8s steps(1, end) infinite; }
-  .ghost-float { animation: haunt 7s ease-in-out infinite; }
-  .ghost-eyes { animation: blink 4.5s infinite; }
   @keyframes flicker {
     0%, 100% { opacity: 1; } 7% { opacity: .78; } 10% { opacity: 1; } 31% { opacity: .9; }
     34% { opacity: .7; } 37% { opacity: 1; } 62% { opacity: .86; } 66% { opacity: 1; } 88% { opacity: .8; } 91% { opacity: 1; }
@@ -434,12 +433,6 @@ body { overflow-x: clip; }
     20% { transform: scale(1.08, .88); }
     50% { transform: translateY(-46px) scale(.95, 1.07) rotate(4deg); }
     80% { transform: scale(1.06, .92); }
-  }
-  @keyframes haunt {
-    0%, 100% { transform: translate(0, 0) rotate(-4deg); }
-    30% { transform: translate(-26px, -22px) rotate(3deg); }
-    55% { transform: translate(14px, -40px) rotate(-2deg); }
-    80% { transform: translate(22px, -8px) rotate(5deg); }
   }
   @keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
 }
@@ -471,3 +464,16 @@ body { overflow-x: clip; }
 .logo-sm { height: 60px; }
 footer { align-items: center; }
 @media (max-width: 760px) { .logo { height: 60px; } .logo-sm { height: 50px; } footer { align-items: flex-start; gap: 10px; } }
+
+/* Black cat beside the jack-o'-lantern */
+.cat { fill: #0b0812; filter: drop-shadow(0 0 7px rgb(175 140 255 / .55)); }
+.cat-tail { stroke: #0b0812; transform-box: fill-box; transform-origin: 0% 100%; }
+.cat-eyes, .cat-ear { transform-box: fill-box; transform-origin: center; }
+.cat-ear { transform-origin: 30% 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  .cat-tail { animation: swish 3.2s ease-in-out infinite; }
+  .cat-eyes { animation: blink 5s infinite; }
+  .cat-ear { animation: twitch 7s 2s infinite; }
+  @keyframes swish { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-16deg); } }
+  @keyframes twitch { 0%, 94%, 100% { transform: rotate(0); } 96% { transform: rotate(14deg); } }
+}
