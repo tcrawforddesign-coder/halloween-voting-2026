@@ -477,3 +477,18 @@ footer { align-items: center; }
   @keyframes swish { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-16deg); } }
   @keyframes twitch { 0%, 94%, 100% { transform: rotate(0); } 96% { transform: rotate(14deg); } }
 }
+
+/* Ballot embedded on the page */
+.vote-section { grid-template-columns: 1fr; gap: 0; max-width: 960px; text-align: center; }
+.vote-head { align-self: auto; }
+.vote-head p { margin-left: auto; margin-right: auto; }
+.ballot-card { padding: 14px 14px 18px; margin-top: 64px; }
+.ballot-frame {
+  display: block; width: 100%; height: 1100px; border: 0;
+  border-radius: 10px; background: #fff; color-scheme: light;
+}
+.ballot-note a { color: var(--pumpkin-hi); text-underline-offset: 3px; }
+@media (max-width: 760px) {
+  .ballot-card { padding: 8px 8px 14px; margin-top: 56px; }
+  .ballot-frame { height: 1200px; }
+}

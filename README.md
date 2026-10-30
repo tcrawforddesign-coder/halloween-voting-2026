@@ -21,11 +21,11 @@ Costume photos are resized and stripped of camera metadata before they are added
 
 ## Voting
 
-The ballot section below the gallery has an "Open the ballot" button that opens the Microsoft Form in a new tab. The form isn't embedded, because Microsoft Forms often won't load inside another page (especially when responses are limited to your organization). Microsoft Forms collects the votes; this repository doesn’t store responses.
+The Microsoft Form is embedded in the ballot section below the gallery (`&embed=true`), with an "Open it in a new tab" link underneath as a fallback. The embed only works when the form is set to "Anyone can respond"; forms limited to your organization need a sign-in that browsers won't show inside another site. Microsoft Forms collects the votes; this repository doesn’t store responses.
 
 Keep ballot choices in Microsoft Forms aligned with the entry names shown on the page. Adding a gallery entry doesn’t create a Forms answer option. Manage response limits, dates, and notifications in Forms.
 
-To change ballots, update `VOTING_FORM_URL` in `script.js` and the ballot link in `index.html`.
+To change ballots, update `VOTING_FORM_URL` in `script.js`, plus the iframe URL and fallback link in `index.html`. Keep `embed=true` on the iframe.
 
 ## Design
 
