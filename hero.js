@@ -17,19 +17,27 @@
   ];
   const bats = Array.from({ length: 4 }, (_, i) => ({ off: i / 4, sp: rand(.03, .05), y: rand(.08, .45), amp: rand(.02, .05), s: rand(.6, 1.1), fl: rand(9, 14), ph: rand(0, TAU) }));
 
-  // Soft blobs kept inside the sprite (wrapped horizontally when tiling) so no blob is ever clipped into a hard edge
+  // Soft haze: blobs kept inside the sprite, then blurred together so no puff shows a rim or edge.
+  // Tiling sprites wrap horizontally so they repeat seamlessly.
   function softSprite(w, h, n, color, yMin, yMax, tile) {
-    const cv = document.createElement('canvas'); cv.width = w; cv.height = h; const c = cv.getContext('2d');
+    const pad = Math.round(h * .12);
+    const tmp = document.createElement('canvas'); tmp.width = w; tmp.height = h; const t = tmp.getContext('2d');
     for (let i = 0; i < n; i++) {
-      const r = rand(h * .12, h * .3);
-      const y = Math.min(h - r, Math.max(r, rand(h * yMin, h * yMax)));
-      const x = tile ? rand(0, w) : rand(r, w - r);
+      const r = rand(h * .12, h * .28);
+      const y = Math.min(h - r - pad, Math.max(r + pad, rand(h * yMin, h * yMax)));
+      const x = tile ? rand(0, w) : rand(r + pad, w - r - pad);
       for (const ox of tile ? [-w, 0, w] : [0]) {
-        const g = c.createRadialGradient(x + ox, y, 0, x + ox, y, r);
-        g.addColorStop(0, color); g.addColorStop(.6, color.replace(/[\d.]+\)$/, m => (parseFloat(m) * .45).toFixed(3) + ')')); g.addColorStop(1, 'rgba(0,0,0,0)');
-        c.fillStyle = g; c.fillRect(x + ox - r, y - r, r * 2, r * 2);
+        const g = t.createRadialGradient(x + ox, y, 0, x + ox, y, r);
+        const a = parseFloat(color.match(/[\d.]+\)$/)[0]);
+        const col = k => color.replace(/[\d.]+\)$/, (a * k).toFixed(3) + ')');
+        g.addColorStop(0, col(1)); g.addColorStop(.35, col(.8)); g.addColorStop(.65, col(.35)); g.addColorStop(.85, col(.1)); g.addColorStop(1, col(0));
+        t.fillStyle = g; t.fillRect(x + ox - r, y - r, r * 2, r * 2);
       }
     }
+    const cv = document.createElement('canvas'); cv.width = w; cv.height = h; const c = cv.getContext('2d');
+    c.filter = `blur(${Math.round(h * .05)}px)`;
+    for (const ox of tile ? [-w, 0, w] : [0]) c.drawImage(tmp, ox, 0);
+    c.filter = 'none';
     return cv;
   }
   function tree(c, x, y, len, ang, w, depth) {
@@ -54,24 +62,26 @@
     // hills and trees, drawn once
     land = document.createElement('canvas'); land.width = W * dpr; land.height = H * dpr;
     const c = land.getContext('2d'); c.scale(dpr, dpr);
-    const hill = c.createLinearGradient(0, ground - 80 * u, 0, H);
-    hill.addColorStop(0, '#1a1029'); hill.addColorStop(.5, '#160e24'); hill.addColorStop(1, 'rgba(20,14,31,0)');
-    c.fillStyle = hill;
-    c.beginPath(); c.moveTo(0, ground - 30 * u);
-    c.bezierCurveTo(W * .25, ground - 80 * u, W * .45, ground - 20 * u, W * .62, ground - 50 * u);
-    c.bezierCurveTo(W * .8, ground - 80 * u, W * .92, ground - 30 * u, W, ground - 60 * u);
-    c.lineTo(W, H); c.lineTo(0, H); c.fill();
+    // Rolling hills as smooth functions, so every tree can be planted exactly on the ground line
+    const backHill = x => ground - 48 * u + Math.sin(x / W * 5.2 + .6) * 16 * u + Math.sin(x / W * 11.3 + 1.7) * 6 * u;
+    const frontHill = x => ground + 2 * u + Math.sin(x / W * 3.4 + 2.2) * 12 * u + Math.sin(x / W * 8.1) * 4 * u;
+    const fillHill = (fn, top, stops) => {
+      const g = c.createLinearGradient(0, top, 0, H);
+      stops.forEach(([o, col]) => g.addColorStop(o, col));
+      c.fillStyle = g; c.beginPath(); c.moveTo(0, H);
+      for (let x = 0; x <= W + 8; x += 8) c.lineTo(x, fn(x));
+      c.lineTo(W, H); c.closePath(); c.fill();
+    };
+    fillHill(backHill, ground - 80 * u, [[0, '#1a1029'], [.5, '#160e24'], [1, 'rgba(20,14,31,0)']]);
     c.strokeStyle = '#0d0815'; c.lineCap = 'round';
     const left = ar.left - cr.left - 60 * u;
     for (let i = 0; i < 9; i++) {
-      const x = rand(left, W);
-      tree(c, x, ground - rand(35, 60) * u, rand(40, 70) * u, -Math.PI / 2 + rand(-.2, .2), rand(2, 3.5) * u, 6);
+      const x = rand(left, W), base = backHill(x) + 6 * u;   // trunk starts just inside the hill
+      tree(c, x, base, rand(46, 76) * u, -Math.PI / 2 + rand(-.15, .15), rand(2, 3.5) * u, 6);
     }
-    const fade = c.createLinearGradient(0, ground - 20 * u, 0, H);
-    fade.addColorStop(0, '#0d0815'); fade.addColorStop(.45, '#130d1e'); fade.addColorStop(1, 'rgba(20,14,31,0)');
-    c.fillStyle = fade;
-    c.beginPath(); c.moveTo(0, ground + 10 * u); c.bezierCurveTo(W * .3, ground - 20 * u, W * .6, ground + 20 * u, W, ground - 10 * u); c.lineTo(W, H); c.lineTo(0, H); c.fill();
-    tree(c, Math.min(W - 30 * u, mx + mr * 1.9), ground + 4 * u, 150 * u, -Math.PI / 2 - .2, 9 * u, 8);
+    fillHill(frontHill, ground - 20 * u, [[0, '#0d0815'], [.45, '#130d1e'], [1, 'rgba(20,14,31,0)']]);
+    const bx = Math.min(W - 30 * u, mx + mr * 1.9);
+    tree(c, bx, frontHill(bx) + 10 * u, 160 * u, -Math.PI / 2 - .2, 9 * u, 8);
     fog = [softSprite(900, 260, 44, 'rgba(215,205,240,.13)', .3, .7, true), softSprite(900, 260, 40, 'rgba(215,205,240,.17)', .3, .7, true)];
     clouds = [0, 1, 2, 3].map(i => ({ img: softSprite(520, 180, 16, i % 2 ? 'rgba(80,60,120,.38)' : 'rgba(120,100,160,.3)', .35, .65, false), x: rand(0, 1), dy: rand(-1.2, .4), sp: rand(.006, .014), s: rand(.7, 1.2) }));
     if (REDUCE) draw(6);
@@ -111,8 +121,8 @@
   function drawGhost(x, y, h, t, alpha, tilt) {
     const w = h * .7, sw = Math.sin(t * 1.6) * .09, sw2 = Math.sin(t * 1.6 + 1.3) * .12;
     ctx.save(); ctx.translate(x, y); ctx.rotate(tilt); ctx.globalAlpha = alpha;
-    const halo = ctx.createRadialGradient(0, -h * .1, h * .1, 0, 0, h * .95);
-    halo.addColorStop(0, 'rgba(206,224,250,.18)'); halo.addColorStop(1, 'rgba(206,224,250,0)');
+    const halo = ctx.createRadialGradient(0, -h * .1, 0, 0, -h * .1, h * .95);
+    halo.addColorStop(0, 'rgba(206,224,250,.16)'); halo.addColorStop(.45, 'rgba(206,224,250,.07)'); halo.addColorStop(.75, 'rgba(206,224,250,.02)'); halo.addColorStop(1, 'rgba(206,224,250,0)');
     ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(0, -h * .1, h * .95, 0, TAU); ctx.fill();
     ctx.scale(w, h);
     const body = new Path2D();
