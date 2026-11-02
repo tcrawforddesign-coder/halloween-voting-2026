@@ -1,3 +1,25 @@
+// Always open at the top (the hero), even from a shared link ending in #gallery or #vote,
+// after a reload, or if the embedded ballot grabs focus while it loads.
+// In-page links (View the entries, Cast your vote) still scroll normally once someone clicks them.
+(function () {
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) {}
+  if (location.hash) {
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  }
+  window.scrollTo(0, 0);
+  let userMoved = false;
+  const mark = () => { userMoved = true; };
+  ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(type => addEventListener(type, mark, { once: true, passive: true }));
+  const keepTop = () => { if (!userMoved) window.scrollTo(0, 0); };
+  addEventListener('load', keepTop);
+  // the ballot iframe can load and take focus a few seconds later; undo any jump it causes
+  const stopAt = Date.now() + 6000;
+  addEventListener('scroll', function guard() {
+    if (Date.now() > stopAt) { removeEventListener('scroll', guard); return; }
+    keepTop();
+  }, { passive: true });
+})();
+
 // Published Microsoft Forms voting link; the embedded form is in index.html.
 const VOTING_FORM_URL = 'https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=2zH5WK9dC0Wxyvkqk8LWfrDFBeKJoU9MvE1GYf_4z_1UQjE5T1pITExOMDNBSzdFTDFJMDJDVE0wSi4u';
 
