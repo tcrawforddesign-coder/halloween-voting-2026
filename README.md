@@ -13,6 +13,7 @@ The published site lives on the `gh-pages` branch. Keep all asset paths relative
 | C03 | The Mandalorian | 3Sixty Costume Contest | `assets/submissions/costume-c03.jpg` |
 | C04 | Cardinals player | 3Sixty Costume Contest | `assets/submissions/costume-c04.jpg` |
 | C05 | Powerpuff Girls family | 3Sixty Costume Contest | `assets/submissions/costume-c05.jpg` |
+| C06 | Lamb and Little Bo-Peep | 3Sixty Costume Contest | `assets/submissions/costume-c06.jpg` |
 | P01 | Hooded pumpkin | 3Sixty Pumpkin Contest | `assets/submissions/pumpkin-p01.jpg` |
 | P02 | Paper lantern | 3Sixty Pumpkin Contest | `assets/submissions/pumpkin-p02.jpg` |
 | P03 | Jack Skellington | 3Sixty Pumpkin Contest | `assets/submissions/pumpkin-p03.jpg` |
